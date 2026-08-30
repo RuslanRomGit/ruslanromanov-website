@@ -245,7 +245,6 @@ button { font-family: var(--font-sans); }
   width: 100%;
   border-radius: 2px;
   object-fit: cover;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, .28);
 }
 
 /* ---------- TRUST BAR ---------- */
@@ -614,7 +613,6 @@ button { font-family: var(--font-sans); }
     gap: 20px;
   }
   .hero-photo-wrap { order: -1; margin-bottom: 4px; }
-  .hero-photo { box-shadow: 0 16px 32px rgba(0, 0, 0, .28); }
   .hero h1 { font-size: 28px; line-height: 1.2; }
   .hero-sub { font-size: 14px; max-width: none; }
   .hero-kicker { font-size: 12px; }
