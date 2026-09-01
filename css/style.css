@@ -241,17 +241,13 @@ button { font-family: var(--font-sans); }
 
 .hero-stat-label { font-size: 13px; color: var(--muted); }
 
-.hero-photo-wrap {
-  aspect-ratio: 476 / 383;
-}
+.hero-photo-wrap { display: flex; justify-content: flex-end; }
 
 .hero-photo {
   width: 100%;
-  height: 100%;
-  aspect-ratio: 476 / 383;
+  max-width: 412px;
+  height: auto;
   border-radius: 2px;
-  object-fit: cover;
-  object-position: center top;
 }
 
 /* ---------- TRUST BAR ---------- */
@@ -638,8 +634,8 @@ button { font-family: var(--font-sans); }
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  .hero-photo-wrap { margin-top: 28px; aspect-ratio: auto; }
-  .hero-photo { aspect-ratio: auto; height: auto; object-position: center; }
+  .hero-photo-wrap { margin-top: 28px; justify-content: center; }
+  .hero-photo { max-width: 100%; }
   .hero h1 { font-size: 28px; line-height: 1.2; }
   .hero-sub { font-size: 14px; max-width: none; }
   .hero-kicker { font-size: 12px; }
