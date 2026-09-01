@@ -626,9 +626,7 @@ button { font-family: var(--font-sans); }
   .hero-kicker { font-size: 12px; }
   .hero-ctas { margin-top: 0; }
   .hero-ctas .btn-accent { width: 100%; padding: 15px 22px; }
-  .hero-stats { gap: 0; justify-content: space-between; margin-top: 22px; padding-top: 22px; }
-  .hero-stat-num { font-size: 22px; }
-  .hero-stat-label { font-size: 11px; }
+  .hero-stats { display: none; }
 
   .trust { padding-top: 32px; padding-bottom: 32px; gap: 16px; }
   .trust-kicker { font-size: 11px; }
