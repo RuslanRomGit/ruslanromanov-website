@@ -543,6 +543,14 @@ button { font-family: var(--font-sans); }
   margin-top: 6px;
 }
 
+.contact-alt {
+  font-size: 14px;
+  color: var(--ink-soft-2);
+  text-align: center;
+  margin-top: 2px;
+}
+.contact-alt a { font-weight: 600; }
+
 .contact-note { font-size: 13px; color: var(--muted); margin-top: 4px; }
 
 .form-status {
@@ -612,7 +620,7 @@ button { font-family: var(--font-sans); }
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  .hero-photo-wrap { order: -1; margin-bottom: 4px; }
+  .hero-photo-wrap { margin-top: 28px; }
   .hero h1 { font-size: 28px; line-height: 1.2; }
   .hero-sub { font-size: 14px; max-width: none; }
   .hero-kicker { font-size: 12px; }
@@ -671,6 +679,7 @@ button { font-family: var(--font-sans); }
   .contact-head h2 { font-size: 26px; }
   .contact-head p { font-size: 14px; }
   .contact-note { font-size: 12px; }
+  .contact-alt { font-size: 13px; }
 
   .footer { flex-direction: column; align-items: center; text-align: center; padding: 24px 22px; }
 }
