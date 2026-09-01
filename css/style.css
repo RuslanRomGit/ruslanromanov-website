@@ -311,6 +311,9 @@ button { font-family: var(--font-sans); }
   display: block;
 }
 
+.trust-logo-chip--wordmark { padding: 8px 6px; }
+.trust-logo-chip--wordmark img { max-height: 68px; }
+
 .trust-note { font-size: 13px; color: var(--muted); text-align: center; }
 
 /* ---------- GENERIC PADDED SECTIONS ---------- */
@@ -635,6 +638,8 @@ button { font-family: var(--font-sans); }
   .trust-logo--small { font-size: 13px; }
   .trust-logo-chip { height: 64px; padding: 8px 12px; flex: 1 1 40%; }
   .trust-logo-chip img { max-height: 38px; }
+  .trust-logo-chip--wordmark { padding: 8px 6px; }
+  .trust-logo-chip--wordmark img { max-height: 48px; }
   .trust-note { font-size: 12px; }
 
   .section { padding-top: 48px; padding-bottom: 48px; }
