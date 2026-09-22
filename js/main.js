@@ -29,16 +29,18 @@
   if (form && status) {
     var submitBtn = form.querySelector('button[type="submit"]');
     var originalLabel = submitBtn.textContent;
-    var consentBoxes = form.querySelectorAll('.consent-check input[type="checkbox"]');
+    var agreeBoxes = form.querySelectorAll('.agree-row input[type="checkbox"]');
+    var allAgreed = function () {
+      return Array.prototype.every.call(agreeBoxes, function (cb) { return cb.checked; });
+    };
 
     // Кнопка «Отправить» активна только когда оба чекбокса согласия отмечены
     var updateSubmitState = function () {
-      var allChecked = Array.prototype.every.call(consentBoxes, function (cb) { return cb.checked; });
-      submitBtn.disabled = !allChecked;
+      submitBtn.disabled = !allAgreed();
     };
 
-    if (consentBoxes.length) {
-      consentBoxes.forEach(function (cb) {
+    if (agreeBoxes.length) {
+      agreeBoxes.forEach(function (cb) {
         cb.addEventListener('change', updateSubmitState);
       });
       updateSubmitState();
@@ -46,6 +48,13 @@
 
     form.addEventListener('submit', function (event) {
       event.preventDefault();
+
+      // Доп. проверка на случай, если кнопка стала кликабельной в обход обычной логики
+      // (например, из-за стороннего расширения браузера) — блокируем отправку без согласий.
+      if (agreeBoxes.length && !allAgreed()) {
+        updateSubmitState();
+        return;
+      }
 
       submitBtn.disabled = true;
       submitBtn.textContent = 'Отправляю…';

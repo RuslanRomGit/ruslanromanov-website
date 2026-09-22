@@ -559,14 +559,14 @@ button { font-family: var(--font-sans); }
   pointer-events: none;
 }
 
-.contact-consent {
+.agree-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
   text-align: left;
 }
 
-.consent-check {
+.agree-row {
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -575,7 +575,7 @@ button { font-family: var(--font-sans); }
   color: var(--ink-soft-2);
   cursor: pointer;
 }
-.consent-check input[type="checkbox"] {
+.agree-row input[type="checkbox"] {
   width: 16px;
   height: 16px;
   margin-top: 2px;
@@ -583,8 +583,8 @@ button { font-family: var(--font-sans); }
   accent-color: var(--accent);
   cursor: pointer;
 }
-.consent-check a { text-decoration: underline; }
-.consent-check a:hover { color: var(--ink); }
+.agree-row a { text-decoration: underline; }
+.agree-row a:hover { color: var(--ink); }
 
 .contact-submit {
   width: 100%;
