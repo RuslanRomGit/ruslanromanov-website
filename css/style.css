@@ -622,16 +622,11 @@ button { font-family: var(--font-sans); }
 }
 .footer span { font-size: 13px; color: var(--muted); }
 
-.footer-legal {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.footer-legal a {
+.footer-legal-link {
   font-size: 13px;
   color: var(--muted);
 }
-.footer-legal a:hover { color: var(--ink); }
+.footer-legal-link:hover { color: var(--ink); }
 
 /* ---------- LEGAL PAGES ---------- */
 
@@ -790,8 +785,7 @@ button { font-family: var(--font-sans); }
   .about-mv { grid-template-columns: 1fr; gap: 24px; margin-bottom: 32px; padding-bottom: 32px; }
   .about-values-head { font-size: 18px; margin-bottom: 16px; }
 
-  .footer { flex-direction: column; align-items: center; text-align: center; padding: 24px 22px; }
-  .footer-legal { gap: 14px; }
+  .footer { flex-direction: column; align-items: center; text-align: center; padding: 24px 22px; gap: 10px; }
 
   .legal-hero { padding-top: 40px; }
   .legal-hero h1 { font-size: 25px; }
