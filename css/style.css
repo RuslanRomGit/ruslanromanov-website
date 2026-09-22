@@ -549,6 +549,43 @@ button { font-family: var(--font-sans); }
 .contact-form input::placeholder,
 .contact-form textarea::placeholder { color: var(--muted); }
 
+/* Honeypot-поле для защиты от ботов — скрыто от людей, видно ботам, заполняющим все поля подряд */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.contact-consent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+
+.consent-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--ink-soft-2);
+  cursor: pointer;
+}
+.consent-check input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.consent-check a { text-decoration: underline; }
+.consent-check a:hover { color: var(--ink); }
+
 .contact-submit {
   width: 100%;
   background: var(--accent);
@@ -558,6 +595,11 @@ button { font-family: var(--font-sans); }
   padding: 16px;
   margin-top: 6px;
 }
+.contact-submit:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+.contact-submit:disabled:hover { opacity: .4; }
 
 .contact-alt {
   font-size: 14px;

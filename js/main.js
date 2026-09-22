@@ -27,11 +27,26 @@
   var status = document.getElementById('formStatus');
 
   if (form && status) {
+    var submitBtn = form.querySelector('button[type="submit"]');
+    var originalLabel = submitBtn.textContent;
+    var consentBoxes = form.querySelectorAll('.consent-check input[type="checkbox"]');
+
+    // Кнопка «Отправить» активна только когда оба чекбокса согласия отмечены
+    var updateSubmitState = function () {
+      var allChecked = Array.prototype.every.call(consentBoxes, function (cb) { return cb.checked; });
+      submitBtn.disabled = !allChecked;
+    };
+
+    if (consentBoxes.length) {
+      consentBoxes.forEach(function (cb) {
+        cb.addEventListener('change', updateSubmitState);
+      });
+      updateSubmitState();
+    }
+
     form.addEventListener('submit', function (event) {
       event.preventDefault();
 
-      var submitBtn = form.querySelector('button[type="submit"]');
-      var originalLabel = submitBtn.textContent;
       submitBtn.disabled = true;
       submitBtn.textContent = 'Отправляю…';
       status.className = 'form-status';
@@ -60,8 +75,8 @@
           status.className = 'form-status is-visible is-error';
         })
         .finally(function () {
-          submitBtn.disabled = false;
           submitBtn.textContent = originalLabel;
+          updateSubmitState();
         });
     });
   }

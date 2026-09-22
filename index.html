@@ -304,10 +304,21 @@
     <p>Опишите задачу — отвечу в&nbsp;течение одного-двух рабочих дней.</p>
   </div>
   <form class="contact-form" id="contactForm" action="https://formspree.io/f/mnpqnoeq" method="POST">
-    <input type="text" name="name" placeholder="Имя" required>
-    <input type="text" name="contact" placeholder="Email или Telegram" required>
+    <input type="text" name="_gotcha" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <input type="text" name="name" placeholder="Имя" autocomplete="name" required>
+    <input type="text" name="contact" placeholder="Email или Telegram" autocomplete="email" required>
     <textarea name="message" placeholder="Коротко о задаче" rows="4" required></textarea>
-    <button type="submit" class="btn contact-submit">Отправить</button>
+    <div class="contact-consent">
+      <label class="consent-check">
+        <input type="checkbox" id="consentPrivacy" name="consent_privacy" value="да" required>
+        <span>Ознакомлен(а) с&nbsp;<a href="privacy.html" target="_blank" rel="noopener">политикой конфиденциальности</a></span>
+      </label>
+      <label class="consent-check">
+        <input type="checkbox" id="consentProcessing" name="consent_processing" value="да" required>
+        <span>Даю согласие на&nbsp;<a href="consent.html" target="_blank" rel="noopener">обработку персональных данных</a></span>
+      </label>
+    </div>
+    <button type="submit" class="btn contact-submit" disabled>Отправить</button>
     <p class="form-status" id="formStatus" role="status"></p>
     <p class="contact-alt">Или сразу напишите в&nbsp;Telegram — <a href="https://t.me/Ruslan_V_Rom" target="_blank" rel="noopener">@Ruslan_V_Rom</a></p>
     <p class="contact-note">Обсуждение конфиденциально. Готов подписать NDA до&nbsp;начала работы.</p>
