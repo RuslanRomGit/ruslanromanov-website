@@ -224,15 +224,16 @@ button { font-family: var(--font-sans); }
 .hero-link:hover { color: #FFFFFF; }
 
 .hero-stats {
-  display: flex;
-  gap: 44px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px 24px;
   margin-top: 16px;
   padding-top: 30px;
   border-top: 1px solid var(--line-dark);
   flex-wrap: wrap;
 }
 
-.hero-stat { display: flex; flex-direction: column; gap: 4px; }
+.hero-stat { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
 
 .hero-stat-num {
   font-family: var(--font-serif);
@@ -241,7 +242,7 @@ button { font-family: var(--font-sans); }
   font-weight: 600;
 }
 
-.hero-stat-label { font-size: 13px; color: var(--muted); }
+.hero-stat-label { font-size: 13px; color: var(--muted); overflow-wrap: break-word; }
 
 .hero-photo-wrap { display: flex; justify-content: flex-end; }
 
