@@ -247,7 +247,7 @@ button { font-family: var(--font-sans); }
 
 .hero-photo {
   width: 100%;
-  max-width: 412px;
+  max-width: 469px;
   height: auto;
   border-radius: 2px;
 }
@@ -328,6 +328,7 @@ button { font-family: var(--font-sans); }
 .br-d { display: inline; }
 .br-m { display: none; }
 .hide-m { display: inline; }
+.nobreak { white-space: nowrap; }
 
 /* ---------- GENERIC PADDED SECTIONS ---------- */
 
@@ -785,6 +786,7 @@ button { font-family: var(--font-sans); }
   .section { padding-top: 48px; padding-bottom: 48px; }
   .section-head { margin-bottom: 28px; }
   .section-head h2 { font-size: 24px; }
+  #about h2 { font-size: 15px; line-height: 1.4; }
   .section-kicker { font-size: 12px; margin-bottom: 10px; }
 
   .grid-4, .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 16px; }
