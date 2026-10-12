@@ -111,42 +111,68 @@
   }
 
   // ---- Счётчик цифр в блоке статистики hero (-27% / 3.2x / +16%) ----
+  // Как и карточки выше — считает заново при каждом входе в зону видимости
+  // (а не один раз), включая повторный скролл вниз после возврата наверх.
   var heroStatNums = document.querySelectorAll('.hero-stat-num');
 
   if (heroStatNums.length && !prefersReducedMotion && 'IntersectionObserver' in window) {
-    var animateStatNum = function (el) {
-      var raw = el.textContent.trim();
-      var match = raw.match(/^([+\-]?)([\d]*\.?[\d]+)(.*)$/);
-      if (!match) { return; }
+    var statAnimTokens = new WeakMap();
 
-      var sign = match[1] || '';
-      var numStr = match[2];
-      var suffix = match[3] || '';
-      var target = parseFloat(numStr);
-      var decimals = numStr.indexOf('.') > -1 ? numStr.split('.')[1].length : 0;
+    var parseStat = function (raw) {
+      var match = raw.match(/^([+\-]?)([\d]*\.?[\d]+)(.*)$/);
+      if (!match) { return null; }
+      return {
+        sign: match[1] || '',
+        numStr: match[2],
+        suffix: match[3] || '',
+        decimals: match[2].indexOf('.') > -1 ? match[2].split('.')[1].length : 0
+      };
+    };
+
+    var animateStatNum = function (el) {
+      if (!el.hasAttribute('data-final')) {
+        el.setAttribute('data-final', el.textContent.trim());
+      }
+      var parsed = parseStat(el.getAttribute('data-final'));
+      if (!parsed) { return; }
+
+      var target = parseFloat(parsed.numStr);
       var duration = 900;
       var start = null;
+      var token = {};
+      statAnimTokens.set(el, token);
 
       var step = function (ts) {
+        if (statAnimTokens.get(el) !== token) { return; } // отменено повторным триггером
         if (start === null) { start = ts; }
         var progress = Math.min((ts - start) / duration, 1);
         var eased = 1 - Math.pow(1 - progress, 3);
-        var current = (target * eased).toFixed(decimals);
-        el.textContent = sign + current + suffix;
+        var current = (target * eased).toFixed(parsed.decimals);
+        el.textContent = parsed.sign + current + parsed.suffix;
         if (progress < 1) {
           requestAnimationFrame(step);
         } else {
-          el.textContent = sign + numStr + suffix;
+          el.textContent = parsed.sign + parsed.numStr + parsed.suffix;
         }
       };
       requestAnimationFrame(step);
     };
 
-    var statsObserver = new IntersectionObserver(function (entries, obs) {
+    var resetStatNum = function (el) {
+      var finalRaw = el.getAttribute('data-final');
+      if (!finalRaw) { return; }
+      var parsed = parseStat(finalRaw);
+      if (!parsed) { return; }
+      el.textContent = parsed.sign + (0).toFixed(parsed.decimals) + parsed.suffix;
+    };
+
+    var statsObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           animateStatNum(entry.target);
-          obs.unobserve(entry.target);
+        } else {
+          statAnimTokens.delete(entry.target);
+          resetStatNum(entry.target);
         }
       });
     }, { threshold: 0.4 });
