@@ -105,6 +105,36 @@ button { font-family: var(--font-sans); }
   box-shadow: 0 10px 24px rgba(30, 36, 48, .08);
 }
 
+/* ---------- SCROLL REVEAL (карточки появляются при скролле) ---------- */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+/* лёгкий каскад внутри одной строки карточек */
+.grid-4 > .reveal:nth-child(2),
+.grid-3 > .reveal:nth-child(2),
+.grid-2 > .reveal:nth-child(2) { transition-delay: .08s; }
+.grid-4 > .reveal:nth-child(3),
+.grid-3 > .reveal:nth-child(3) { transition-delay: .16s; }
+.grid-4 > .reveal:nth-child(4) { transition-delay: .24s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .card:hover {
+    transform: none;
+  }
+}
+
 /* ---------- NAV ---------- */
 
 .nav {

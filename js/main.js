@@ -89,4 +89,69 @@
         });
     });
   }
+
+  // ---- Плавное появление карточек при скролле ----
+  var prefersReducedMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var revealEls = document.querySelectorAll('.reveal');
+
+  if (revealEls.length) {
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+    } else {
+      var revealObserver = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+      revealEls.forEach(function (el) { revealObserver.observe(el); });
+    }
+  }
+
+  // ---- Счётчик цифр в блоке статистики hero (-27% / 3.2x / +16%) ----
+  var heroStatNums = document.querySelectorAll('.hero-stat-num');
+
+  if (heroStatNums.length && !prefersReducedMotion && 'IntersectionObserver' in window) {
+    var animateStatNum = function (el) {
+      var raw = el.textContent.trim();
+      var match = raw.match(/^([+\-]?)([\d]*\.?[\d]+)(.*)$/);
+      if (!match) { return; }
+
+      var sign = match[1] || '';
+      var numStr = match[2];
+      var suffix = match[3] || '';
+      var target = parseFloat(numStr);
+      var decimals = numStr.indexOf('.') > -1 ? numStr.split('.')[1].length : 0;
+      var duration = 900;
+      var start = null;
+
+      var step = function (ts) {
+        if (start === null) { start = ts; }
+        var progress = Math.min((ts - start) / duration, 1);
+        var eased = 1 - Math.pow(1 - progress, 3);
+        var current = (target * eased).toFixed(decimals);
+        el.textContent = sign + current + suffix;
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        } else {
+          el.textContent = sign + numStr + suffix;
+        }
+      };
+      requestAnimationFrame(step);
+    };
+
+    var statsObserver = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          animateStatNum(entry.target);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+
+    heroStatNums.forEach(function (el) { statsObserver.observe(el); });
+  }
 })();
